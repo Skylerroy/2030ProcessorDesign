@@ -81,14 +81,18 @@ function katexPlugin(md: any) {
     const start = state.pos + 1
     // 不是 display（$$）才进 inline
     if (state.src[state.pos + 1] === '$') return false
-    // 向前找匹配的 $（跳过 \\$ 转义）
+    // 向前找匹配的 $（跳过 \\$ 转义）；**遇到空行**就放弃，避免把段落外的
+    // 另一个 $ 错误配对。
     let pos = start
     let found = -1
     while (pos < state.posMax) {
       const ch = state.src[pos]
       if (ch === '\\') { pos += 2; continue }
       if (ch === '$') { found = pos; break }
-      // 禁止跨越 block 结束（行尾 + 下一空行）
+      // 检测 \n\n 空行：math 不能跨段落
+      if (ch === '\n' && pos + 1 < state.posMax && state.src[pos + 1] === '\n') {
+        return false
+      }
       pos++
     }
     if (found === -1 || found === start) return false
