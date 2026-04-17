@@ -79,33 +79,20 @@ function katexPlugin(md: any) {
   md.inline.ruler.after('escape', 'math_inline', (state: any, silent: boolean) => {
     if (state.src[state.pos] !== '$') return false
     const start = state.pos + 1
-    // 不是 display（$$）才进 inline
     if (state.src[state.pos + 1] === '$') return false
-    // 向前找匹配的 $（跳过 \\$ 转义）；**遇到空行**就放弃，避免把段落外的
-    // 另一个 $ 错误配对。
+    // 单行 inline math：遇到换行即放弃（md 预处理会把跨行 `$...$` 压为单行）
     let pos = start
     let found = -1
     while (pos < state.posMax) {
       const ch = state.src[pos]
       if (ch === '\\') { pos += 2; continue }
       if (ch === '$') { found = pos; break }
-      // 检测 \n\n 空行：math 不能跨段落
-      if (ch === '\n' && pos + 1 < state.posMax && state.src[pos + 1] === '\n') {
-        return false
-      }
+      if (ch === '\n') return false
       pos++
     }
     if (found === -1 || found === start) return false
     const content = state.src.slice(start, found)
-    // Pandoc tex_math_dollars 规则的近似：
-    //   - 允许跨行（换行 \n 可出现在边界，pandoc 经常输出 `$\nX\n$`）
-    //   - 禁止紧贴空格/制表符（`$ x $` 不是公式）
-    //   - `$` 前后不应紧贴数字（避免 "价格 $100" 被识别）
-    if (/^[ \t]/.test(content) || /[ \t]$/.test(content)) return false
-    const before = state.src[state.pos - 1]
-    const after = state.src[found + 1]
-    if (before && /\d/.test(before)) return false
-    if (after && /\d/.test(after)) return false
+    if (/^\s/.test(content) || /\s$/.test(content)) return false
     if (!silent) {
       const token = state.push('math_inline', '', 0)
       token.markup = '$'
