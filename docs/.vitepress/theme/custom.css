@@ -2,6 +2,30 @@
 @import 'katex/dist/katex.min.css';
 
 /*
+ * 复制友好：KaTeX 默认把原始 LaTeX 源包在 <annotation encoding="application/x-tex">
+ * 里（给屏幕阅读器用），但浏览器选中复制时会把 MathML 的源和可见的渲染字符同时
+ * 拷走——粘贴出来就是 "T_{\mathrm{cycle}} T cycle = D/n + S" 双份混乱。
+ *
+ * 下面把 .katex-mathml 改为复制时跳过（user-select:none），同时保留 clip
+ * 让 Firefox/Safari 原生 MathML 渲染不会视觉重叠；屏幕阅读器仍能朗读。
+ */
+.katex-mathml {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  /* 跨浏览器把视觉 clip 固定到 1×1px，防止 Firefox/Safari 原生 MathML 溢出 */
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  clip-path: inset(50%) !important;
+  padding: 0 !important;
+  border: 0 !important;
+  height: 1px !important;
+  width: 1px !important;
+  overflow: hidden !important;
+  white-space: nowrap !important;
+}
+
+/*
  * 自定义容器样式：对应原书 processor-design.sty 里的 5 个 tcolorbox 环境。
  *   designtip  → VitePress ::: tip        黄色（内置）
  *   hwblock    → VitePress ::: info       蓝色（内置）
