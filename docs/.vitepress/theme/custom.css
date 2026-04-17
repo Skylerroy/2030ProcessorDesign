@@ -1,6 +1,26 @@
 /* KaTeX 公式样式（必须最先 import） */
 @import 'katex/dist/katex.min.css';
 
+/* ------------------------------------------------------------------ *
+ * 中文正文排版：段落首行缩进 2 个字符（2em）                           *
+ * ------------------------------------------------------------------ */
+.vp-doc p {
+  text-indent: 2em;
+}
+/* 以下场景不应缩进：列表项内部段落、表格单元格、图表标题、容器标题、
+   图占位段落、引用段首段（blockquote 自身已缩进）。 */
+.vp-doc li > p,
+.vp-doc td p,
+.vp-doc th p,
+.vp-doc figcaption,
+.vp-doc figure > p,
+.vp-doc .custom-block > p:first-child,
+.vp-doc .custom-block-title,
+.vp-doc blockquote > p,
+.vp-doc details > summary {
+  text-indent: 0;
+}
+
 /*
  * 复制友好：KaTeX 默认把原始 LaTeX 源包在 <annotation encoding="application/x-tex">
  * 里（给屏幕阅读器用），但浏览器选中复制时会把 MathML 的源和可见的渲染字符同时
