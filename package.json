@@ -1,0 +1,20 @@
+{
+  "name": "2030-processor-design",
+  "version": "0.2.0",
+  "private": true,
+  "description": "《2030处理器设计》GitBook 版 —— 从 LaTeX 源自动生成的开源在线书",
+  "author": "王丰羽 assisted by Claude Code",
+  "license": "SEE LICENSE IN LICENSE",
+  "type": "module",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "markdown-it-container": "^4.0.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "vitepress": "^1.6.3",
+    "vue": "^3.5.13"
+  }
+}

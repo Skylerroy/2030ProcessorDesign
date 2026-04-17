@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 560" width="400" height="560">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#0e0e52"/>
+      <stop offset="45%" stop-color="#19197a"/>
+      <stop offset="100%" stop-color="#2a2ab0"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5ad1ff" stop-opacity="0.0"/>
+      <stop offset="50%" stop-color="#5ad1ff" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#5ad1ff" stop-opacity="0.0"/>
+    </linearGradient>
+    <pattern id="lattice" x="0" y="0" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M0 14 L14 0 L28 14 L14 28 Z" fill="none" stroke="#ffffff" stroke-opacity="0.07" stroke-width="0.8"/>
+      <circle cx="14" cy="14" r="1" fill="#ffffff" fill-opacity="0.12"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="400" height="560" fill="url(#bg)"/>
+  <!-- Semiconductor lattice pattern -->
+  <rect x="0" y="0" width="400" height="560" fill="url(#lattice)"/>
+
+  <!-- Outer frame -->
+  <rect x="16" y="16" width="368" height="528" fill="none" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1"/>
+  <rect x="22" y="22" width="356" height="516" fill="none" stroke="#ffffff" stroke-opacity="0.15" stroke-width="0.5"/>
+
+  <!-- Top pipeline stages (abstract) -->
+  <g transform="translate(40, 70)">
+    <g fill="none" stroke="#5ad1ff" stroke-opacity="0.55" stroke-width="1.2">
+      <rect x="0"   y="0" width="48" height="22" rx="2"/>
+      <rect x="54"  y="0" width="48" height="22" rx="2"/>
+      <rect x="108" y="0" width="48" height="22" rx="2"/>
+      <rect x="162" y="0" width="48" height="22" rx="2"/>
+      <rect x="216" y="0" width="48" height="22" rx="2"/>
+      <rect x="270" y="0" width="48" height="22" rx="2"/>
+    </g>
+    <g font-family="sans-serif" font-size="9" fill="#5ad1ff" fill-opacity="0.85" text-anchor="middle">
+      <text x="24"  y="14">IF</text>
+      <text x="78"  y="14">ID</text>
+      <text x="132" y="14">RN</text>
+      <text x="186" y="14">IS</text>
+      <text x="240" y="14">EX</text>
+      <text x="294" y="14">WB</text>
+    </g>
+  </g>
+
+  <!-- Accent line -->
+  <rect x="40" y="120" width="320" height="1.5" fill="url(#accent)"/>
+
+  <!-- Title -->
+  <text x="200" y="220" text-anchor="middle" font-family="sans-serif" font-weight="800" font-size="40" fill="#ffffff" letter-spacing="2">2030</text>
+  <text x="200" y="270" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="30" fill="#ffffff">处理器设计</text>
+
+  <!-- Subtitle -->
+  <text x="200" y="320" text-anchor="middle" font-family="sans-serif" font-weight="400" font-size="14" fill="#e0e0ff">从基础到超标量</text>
+  <text x="200" y="344" text-anchor="middle" font-family="sans-serif" font-weight="300" font-size="12" fill="#b8b8e8">面向未来的现代处理器微架构</text>
+
+  <!-- Divider -->
+  <line x1="140" y1="380" x2="260" y2="380" stroke="#5ad1ff" stroke-opacity="0.6" stroke-width="1"/>
+
+  <!-- Abstract core grid (3x3 cores) -->
+  <g transform="translate(140, 410)" fill="none" stroke="#ffffff" stroke-opacity="0.3" stroke-width="0.8">
+    <rect x="0"  y="0"  width="30" height="30" rx="2"/>
+    <rect x="45" y="0"  width="30" height="30" rx="2"/>
+    <rect x="90" y="0"  width="30" height="30" rx="2"/>
+    <rect x="0"  y="45" width="30" height="30" rx="2"/>
+    <rect x="45" y="45" width="30" height="30" rx="2"/>
+    <rect x="90" y="45" width="30" height="30" rx="2"/>
+  </g>
+  <g transform="translate(140, 410)" fill="#5ad1ff" fill-opacity="0.35">
+    <circle cx="15"  cy="15" r="2"/>
+    <circle cx="60"  cy="15" r="2"/>
+    <circle cx="105" cy="15" r="2"/>
+    <circle cx="15"  cy="60" r="2"/>
+    <circle cx="60"  cy="60" r="2"/>
+    <circle cx="105" cy="60" r="2"/>
+  </g>
+
+  <!-- Author block -->
+  <text x="200" y="520" text-anchor="middle" font-family="sans-serif" font-weight="600" font-size="14" fill="#ffffff">王丰羽</text>
+  <text x="200" y="538" text-anchor="middle" font-family="sans-serif" font-weight="300" font-size="10" fill="#c8c8f0">assisted by Claude Code</text>
+</svg>

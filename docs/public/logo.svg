@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#19197a"/>
+      <stop offset="100%" stop-color="#2e2eaa"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" rx="10" ry="10" fill="url(#lg)"/>
+  <!-- subtle grid lines for tech feel -->
+  <g stroke="#ffffff" stroke-opacity="0.08" stroke-width="1">
+    <line x1="0" y1="16" x2="64" y2="16"/>
+    <line x1="0" y1="32" x2="64" y2="32"/>
+    <line x1="0" y1="48" x2="64" y2="48"/>
+    <line x1="16" y1="0" x2="16" y2="64"/>
+    <line x1="32" y1="0" x2="32" y2="64"/>
+    <line x1="48" y1="0" x2="48" y2="64"/>
+  </g>
+  <text x="32" y="36" text-anchor="middle" font-family="sans-serif" font-weight="700" font-size="22" fill="#ffffff" letter-spacing="-1">2030</text>
+  <text x="32" y="52" text-anchor="middle" font-family="sans-serif" font-weight="600" font-size="11" fill="#ffffff" letter-spacing="2">CPU</text>
+</svg>

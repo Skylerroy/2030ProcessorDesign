@@ -1,0 +1,304 @@
+[
+  {
+    "text": "前言",
+    "items": [
+      {
+        "text": "前言",
+        "link": "/preface"
+      },
+      {
+        "text": "符号与记法",
+        "link": "/notation"
+      },
+      {
+        "text": "致谢",
+        "link": "/acknowledgments"
+      }
+    ]
+  },
+  {
+    "text": "第一篇 超标量处理器基础",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "第 1 章 超标量处理器概览",
+        "link": "/part1/ch01"
+      },
+      {
+        "text": "第 2 章 超标量处理器的流水线结构",
+        "link": "/part1/ch02"
+      },
+      {
+        "text": "第 3 章 半导体工艺对微架构的约束",
+        "link": "/part1/ch03"
+      },
+      {
+        "text": "第 4 章 处理器设计的方法论",
+        "link": "/part1/ch04"
+      }
+    ]
+  },
+  {
+    "text": "第二篇 Cache与存储层次",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "第 5 章 Cache的基本原理",
+        "link": "/part2/ch05"
+      },
+      {
+        "text": "第 6 章 提高Cache性能的方法",
+        "link": "/part2/ch06"
+      },
+      {
+        "text": "第 7 章 高级预取技术",
+        "link": "/part2/ch07"
+      },
+      {
+        "text": "第 8 章 多端口Cache与超标量取指",
+        "link": "/part2/ch08"
+      },
+      {
+        "text": "第 9 章 Cache一致性协议",
+        "link": "/part2/ch09"
+      },
+      {
+        "text": "第 10 章 虚拟存储器",
+        "link": "/part2/ch10"
+      },
+      {
+        "text": "第 11 章 TLB的设计",
+        "link": "/part2/ch11"
+      },
+      {
+        "text": "第 12 章 虚拟化与地址转换",
+        "link": "/part2/ch12"
+      }
+    ]
+  },
+  {
+    "text": "第三篇 分支预测",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "第 13 章 分支预测概述",
+        "link": "/part3/ch13"
+      },
+      {
+        "text": "第 14 章 分支方向预测：基本方法",
+        "link": "/part3/ch14"
+      },
+      {
+        "text": "第 15 章 分支方向预测：高级方法",
+        "link": "/part3/ch15"
+      },
+      {
+        "text": "第 16 章 分支目标地址预测",
+        "link": "/part3/ch16"
+      },
+      {
+        "text": "第 17 章 超标量处理器的分支预测",
+        "link": "/part3/ch17"
+      }
+    ]
+  },
+  {
+    "text": "第四篇 指令集与解码",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "第 18 章 指令集体系概述",
+        "link": "/part4/ch18"
+      },
+      {
+        "text": "第 19 章 RISC-V指令集",
+        "link": "/part4/ch19"
+      },
+      {
+        "text": "第 20 章 ARM指令集（AArch64）",
+        "link": "/part4/ch20"
+      },
+      {
+        "text": "第 21 章 x86-64指令集",
+        "link": "/part4/ch21"
+      },
+      {
+        "text": "第 22 章 指令解码",
+        "link": "/part4/ch22"
+      },
+      {
+        "text": "第 23 章 微操作缓存与指令融合",
+        "link": "/part4/ch23"
+      }
+    ]
+  },
+  {
+    "text": "第五篇 乱序执行引擎",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "第 24 章 寄存器重命名的原理",
+        "link": "/part5/ch24"
+      },
+      {
+        "text": "第 25 章 重命名映射表的设计",
+        "link": "/part5/ch25"
+      },
+      {
+        "text": "第 26 章 超标量处理器的寄存器重命名",
+        "link": "/part5/ch26"
+      },
+      {
+        "text": "第 27 章 发射队列的结构",
+        "link": "/part5/ch27"
+      },
+      {
+        "text": "第 28 章 发射过程的流水线",
+        "link": "/part5/ch28"
+      },
+      {
+        "text": "第 29 章 仲裁与唤醒",
+        "link": "/part5/ch29"
+      },
+      {
+        "text": "第 30 章 功能单元：整数运算",
+        "link": "/part5/ch30"
+      },
+      {
+        "text": "第 31 章 功能单元：浮点运算",
+        "link": "/part5/ch31"
+      },
+      {
+        "text": "第 32 章 功能单元：SIMD与向量单元",
+        "link": "/part5/ch32"
+      },
+      {
+        "text": "第 33 章 BRU与其他功能单元",
+        "link": "/part5/ch33"
+      },
+      {
+        "text": "第 34 章 旁路网络",
+        "link": "/part5/ch34"
+      },
+      {
+        "text": "第 35 章 Cluster结构",
+        "link": "/part5/ch35"
+      },
+      {
+        "text": "第 36 章 存储器指令的加速",
+        "link": "/part5/ch36"
+      },
+      {
+        "text": "第 37 章 内存一致性模型",
+        "link": "/part5/ch37"
+      },
+      {
+        "text": "第 38 章 重排序缓冲区与提交",
+        "link": "/part5/ch38"
+      },
+      {
+        "text": "第 39 章 异常、中断与流水线恢复",
+        "link": "/part5/ch39"
+      }
+    ]
+  },
+  {
+    "text": "第六篇 真实世界的处理器",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "第 40 章 Alpha 21264处理器",
+        "link": "/part6/ch40"
+      },
+      {
+        "text": "第 41 章 Intel Core微架构",
+        "link": "/part6/ch41"
+      },
+      {
+        "text": "第 42 章 AMD Zen微架构",
+        "link": "/part6/ch42"
+      },
+      {
+        "text": "第 43 章 ARM Cortex-X系列微架构",
+        "link": "/part6/ch43"
+      },
+      {
+        "text": "第 44 章 RISC-V高性能处理器",
+        "link": "/part6/ch44"
+      }
+    ]
+  },
+  {
+    "text": "第七篇 多核与存储系统",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "第 45 章 同时多线程",
+        "link": "/part7/ch45"
+      },
+      {
+        "text": "第 46 章 大小核与异构多核",
+        "link": "/part7/ch46"
+      },
+      {
+        "text": "第 47 章 多核处理器与片上互连",
+        "link": "/part7/ch47"
+      },
+      {
+        "text": "第 48 章 内存控制器与DRAM接口",
+        "link": "/part7/ch48"
+      }
+    ]
+  },
+  {
+    "text": "第八篇 先进处理器发展",
+    "collapsed": false,
+    "items": [
+      {
+        "text": "第 49 章 功耗管理与热设计",
+        "link": "/part8/ch49"
+      },
+      {
+        "text": "第 50 章 处理器安全：侧信道攻击",
+        "link": "/part8/ch50"
+      },
+      {
+        "text": "第 51 章 处理器安全：防御机制",
+        "link": "/part8/ch51"
+      },
+      {
+        "text": "第 52 章 SoC集成与Chiplet",
+        "link": "/part8/ch52"
+      },
+      {
+        "text": "第 53 章 CXL与新型存储互连",
+        "link": "/part8/ch53"
+      },
+      {
+        "text": "第 54 章 AI加速器与异构计算",
+        "link": "/part8/ch54"
+      },
+      {
+        "text": "第 55 章 面向2030的处理器技术",
+        "link": "/part8/ch55"
+      }
+    ]
+  },
+  {
+    "text": "附录",
+    "items": [
+      {
+        "text": "RISC-V 指令速查",
+        "link": "/appendix/riscv"
+      },
+      {
+        "text": "Verilog 速查",
+        "link": "/appendix/verilog"
+      }
+    ]
+  },
+  {
+    "text": "参考文献",
+    "link": "/bibliography"
+  }
+]

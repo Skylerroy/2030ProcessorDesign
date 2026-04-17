@@ -1,0 +1,104 @@
+/*
+ * 自定义容器样式：对应原书 processor-design.sty 里的 5 个 tcolorbox 环境。
+ *   designtip  → VitePress ::: tip        黄色（内置）
+ *   hwblock    → VitePress ::: info       蓝色（内置）
+ *   perfbox    → VitePress ::: warning    橙色（内置）
+ *   casestudy  → VitePress ::: details    绿色（自定义覆写）
+ *   tradeoff   → markdown-it-container ::: tradeoff  紫色（本文件定义）
+ */
+
+:root {
+  --pd-tradeoff-color: #800080;
+  --pd-tradeoff-bg: #f5eaf5;
+  --pd-tradeoff-border: #800080;
+  --pd-case-color: #008040;
+  --pd-case-bg: #eaf5ee;
+  --pd-case-border: #008040;
+}
+
+.dark {
+  --pd-tradeoff-bg: #2a1a2a;
+  --pd-case-bg: #0f2a1c;
+}
+
+/* ::: tradeoff — 设计权衡（紫色） */
+.custom-block.tradeoff {
+  border-color: var(--pd-tradeoff-border);
+  background-color: var(--pd-tradeoff-bg);
+  color: var(--vp-c-text-1);
+}
+
+.custom-block.tradeoff .custom-block-title {
+  color: var(--pd-tradeoff-color);
+  font-weight: 600;
+}
+
+.custom-block.tradeoff code {
+  background-color: rgba(128, 0, 128, 0.12);
+}
+
+/* ::: details — 案例研究覆写为绿色（原书 casecolor） */
+.custom-block.details {
+  border-color: var(--pd-case-border);
+  background-color: var(--pd-case-bg);
+}
+
+.custom-block.details summary {
+  color: var(--pd-case-color);
+  font-weight: 600;
+}
+
+/* TikZ 生成的 SVG 图居中 + 限制最大宽度 */
+.vp-doc figure {
+  margin: 1.5em auto;
+  text-align: center;
+}
+
+.vp-doc figure img {
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+.vp-doc figure figcaption {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  color: var(--vp-c-text-2);
+  text-align: center;
+}
+
+/* 数学公式块居中、允许横向滚动 */
+.vp-doc mjx-container[display="true"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.2em 0;
+}
+
+/* RISC-V 指令格式表（bytefield 转成的 HTML 表） */
+.instr-format {
+  width: 100%;
+  font-family: var(--vp-font-family-mono);
+  font-size: 0.85em;
+  border-collapse: collapse;
+  margin: 1em 0;
+  text-align: center;
+}
+
+.instr-format th,
+.instr-format td {
+  border: 1px solid var(--vp-c-divider);
+  padding: 4px 6px;
+}
+
+.instr-format th {
+  background: var(--vp-c-default-soft);
+  font-weight: normal;
+  font-size: 0.75em;
+}
+
+/* 章节中单独段落 (eq:xxx) 等 label 锚点可见时略微提示 */
+.eq-label {
+  float: right;
+  color: var(--vp-c-text-3);
+  font-size: 0.9em;
+}

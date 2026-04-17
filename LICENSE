@@ -1,0 +1,19 @@
+《2030处理器设计》GitBook 版（正文与图片）
+Copyright (c) 2026 王丰羽 assisted by Claude Code
+
+本作品（以下简称"本书"）采用 Creative Commons
+署名-非商业性使用-相同方式共享 4.0 国际许可协议（CC BY-NC-SA 4.0）授权。
+
+简要条款：
+  - 署名 (BY)：必须标注原作者"王丰羽 assisted by Claude Code"和许可协议名称。
+  - 非商业性使用 (NC)：不得将本书用于商业目的（含营销、付费培训、付费出版等）。
+  - 相同方式共享 (SA)：基于本书创作的衍生作品须以相同许可协议发布。
+  - 没有附加限制：不得应用法律条款或技术措施限制他人依此许可协议合法使用本书。
+
+完整法律文本请参阅：
+  https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode.zh-Hans
+
+仓库中 `scripts/` 目录下的转换管线代码、`docs/.vitepress/` 目录下的站点
+配置与自定义主题代码适用另一份 MIT 协议，详见 LICENSE-CODE 文件。
+
+SPDX-License-Identifier: CC-BY-NC-SA-4.0

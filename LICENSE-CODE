@@ -1,0 +1,31 @@
+MIT License
+
+Copyright (c) 2026 王丰羽 assisted by Claude Code
+
+本 MIT 协议仅适用于本仓库内的：
+  - scripts/ 目录下的全部构建脚本、Lua 过滤器、Python 脚本
+  - docs/.vitepress/ 目录下的站点配置、自定义主题、TypeScript/CSS 代码
+  - .github/workflows/ 目录下的 CI 配置
+  - package.json 与相关 JavaScript 生态配置
+本书的正文（Markdown、LaTeX 源）、TikZ 绘制的图片、自定义 LaTeX 宏包
+（processor-design.sty 里的样式部分）使用 CC BY-NC-SA 4.0，详见 LICENSE。
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+SPDX-License-Identifier: MIT
