@@ -32,6 +32,13 @@ const KATEX_MACROS: Record<string, string> = {
  */
 function katexPlugin(md: any) {
   const renderTex = (src: string, displayMode: boolean): string => {
+    // 渲染前剥离 AMS-only 的"档案标签"类宏：我们在 math 外面已经用 <a id>/<div id>
+    // 做锚点，math 内的 \label/\tag/\nonumber/\notag 在 KaTeX 下会原样回显"label"
+    // 文字或报错，必须清掉。
+    src = src.replace(/\\label\{[^}]*\}/g, '')
+             .replace(/\\tag\{[^}]*\}/g, '')
+             .replace(/\\nonumber\b/g, '')
+             .replace(/\\notag\b/g, '')
     try {
       return katex.renderToString(src, {
         displayMode,
