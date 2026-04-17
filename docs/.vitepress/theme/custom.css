@@ -29,20 +29,12 @@
  * 下面把 .katex-mathml 改为复制时跳过（user-select:none），同时保留 clip
  * 让 Firefox/Safari 原生 MathML 渲染不会视觉重叠；屏幕阅读器仍能朗读。
  */
+/* Firefox / Safari 对 MathML 有原生渲染，即使用 clip:1×1px 仍会在某些
+   场景下把 MathML 叠显（分子分母"D/n"显示成两行"n\nD"）。直接关掉 MathML
+   副本，只信 .katex-html —— 付出 Mac VoiceOver 朗读数学的代价，换取跨浏览器
+   排版完全一致。 */
 .katex-mathml {
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  /* 跨浏览器把视觉 clip 固定到 1×1px，防止 Firefox/Safari 原生 MathML 溢出 */
-  position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px) !important;
-  clip-path: inset(50%) !important;
-  padding: 0 !important;
-  border: 0 !important;
-  height: 1px !important;
-  width: 1px !important;
-  overflow: hidden !important;
-  white-space: nowrap !important;
+  display: none !important;
 }
 
 /*

@@ -19,11 +19,34 @@ const KATEX_MACROS: Record<string, string> = {
   '\\missrate':    'r_{\\mathrm{miss}}',
   '\\hitrate':     'r_{\\mathrm{hit}}',
   '\\misspenalty': 't_{\\mathrm{penalty}}',
-  // siunitx 近似
+
+  // siunitx 近似（pandoc 常把 \SI{3}{nm} 等翻成原样）
   '\\SI':  '#1\\,\\text{#2}',
   '\\si':  '\\text{#1}',
   '\\num': '#1',
-  '\\qty': '#1\\,\\text{#2}'
+  '\\qty': '#1\\,\\text{#2}',
+
+  // siunitx 的 text-mode 字符宏——KaTeX 原生不认识，显式定义
+  '\\textmu':      '\\mu',
+  '\\textohm':     '\\Omega',
+  '\\textOmega':   '\\Omega',
+  '\\textdegree':  '{}^{\\circ}',
+  '\\textcelsius': '{}^{\\circ}\\mathrm{C}',
+  '\\textmicro':   '\\mu',
+  '\\textangstrom': '\\text{Å}',
+  '\\degree':      '{}^{\\circ}',
+  '\\celsius':     '{}^{\\circ}\\mathrm{C}',
+  '\\angstrom':    '\\text{Å}',
+  '\\micro':       '\\mu',
+  '\\ohm':         '\\Omega',
+
+  // 常用 LaTeX 宏 KaTeX 可能不认
+  '\\textbf':   '\\mathbf{#1}',
+  '\\textit':   '\\mathit{#1}',
+  '\\textrm':   '\\mathrm{#1}',
+  '\\textsf':   '\\mathsf{#1}',
+  '\\texttt':   '\\mathtt{#1}',
+  '\\emph':     '\\mathit{#1}'
 }
 
 /** 自写的 markdown-it 数学插件：直接调用 KaTeX 0.16 的 renderToString，
