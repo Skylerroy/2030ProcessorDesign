@@ -1,3 +1,6 @@
+/* KaTeX 公式样式（必须最先 import） */
+@import 'katex/dist/katex.min.css';
+
 /*
  * 自定义容器样式：对应原书 processor-design.sty 里的 5 个 tcolorbox 环境。
  *   designtip  → VitePress ::: tip        黄色（内置）

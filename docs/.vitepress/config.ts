@@ -1,5 +1,7 @@
 import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
+// @ts-ignore - markdown-it-katex 没有 TypeScript 类型声明
+import katex from 'markdown-it-katex'
 // Phase 2：侧边栏改为由 scripts/build-sidebar.py 从 latex/main.tex 自动生成。
 // 生成产物即本目录下的 sidebar.json；每次 `pnpm run convert` 都会刷新它。
 import sidebar from './sidebar.json' with { type: 'json' }
@@ -43,9 +45,32 @@ export default defineConfig({
 
   markdown: {
     lineNumbers: false,
-    // VitePress 1.6 原生支持数学（底层即 markdown-it-mathjax3）
-    math: true,
+    // 使用 KaTeX 而非 MathJax3：输出 HTML/DOM 结构，可复制、
+    // 与正文字号一致，比 SVG 模式对屏幕阅读和文字选取更友好。
+    // `\SI{3}{GHz}`、`\mathrm{}`、`\text{}` 等常用宏已在 macros 里显式定义，
+    // 使 KaTeX 能识别 LaTeX 源里不是标准 AMS 的宏。
     config: (md) => {
+      md.use(katex, {
+        throwOnError: false,
+        errorColor: '#cc0000',
+        macros: {
+          '\\CPI':   '\\mathrm{CPI}',
+          '\\IPC':   '\\mathrm{IPC}',
+          '\\MIPS':  '\\mathrm{MIPS}',
+          '\\FLOPS': '\\mathrm{FLOPS}',
+          '\\Tcycle': 'T_{\\mathrm{cycle}}',
+          '\\Texec':  'T_{\\mathrm{exec}}',
+          '\\Speedup': '\\mathrm{Speedup}',
+          '\\missrate':    'r_{\\mathrm{miss}}',
+          '\\hitrate':     'r_{\\mathrm{hit}}',
+          '\\misspenalty': 't_{\\mathrm{penalty}}',
+          // siunitx 简化：\SI{3}{GHz} → 3\,\text{GHz}
+          '\\SI':   '#1\\,\\text{#2}',
+          '\\si':   '\\text{#1}',
+          '\\num':  '#1',
+          '\\qty':  '#1\\,\\text{#2}'
+        }
+      })
       // 自定义容器：::: tradeoff 设计权衡 N 标题
       md.use(container, 'tradeoff', {
         validate: (params: string) => !!params.trim().match(/^tradeoff\s*(.*)$/),
