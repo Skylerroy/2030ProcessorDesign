@@ -1,6 +1,8 @@
 import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
 import katex from 'katex'
+import fs from 'node:fs'
+import path from 'node:path'
 // Phase 2：侧边栏改为由 scripts/build-sidebar.py 从 latex/main.tex 自动生成。
 // 生成产物即本目录下的 sidebar.json；每次 `pnpm run convert` 都会刷新它。
 import sidebar from './sidebar.json' with { type: 'json' }
@@ -118,6 +120,15 @@ function katexPlugin(md: any) {
 }
 
 const SITE_BASE = process.env.BASE ?? '/2030ProcessorDesign/'
+// 线上可抓取的完整 URL（用于 sitemap / robots / og 等）。
+// 自定义域名时设 HOSTNAME=https://your-domain.com BASE=/。
+const SITE_HOSTNAME = process.env.HOSTNAME ?? 'https://skylerroy.github.io'
+const SITE_URL = SITE_HOSTNAME + SITE_BASE.replace(/\/$/, '')
+
+// Google Search Console / Bing 等搜索引擎站长验证码（拿到后填这里）。
+// 也可以改成放一个实际的验证文件：把 Google 给的 googleXXX.html 丢到
+// docs/public/ 目录，它会被自动部署到站点根。
+const GOOGLE_SITE_VERIFICATION = process.env.GOOGLE_SITE_VERIFICATION ?? ''
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -138,8 +149,46 @@ export default defineConfig({
 
   head: [
     ['link', { rel: 'icon', href: '/favicon.svg' }],
-    ['meta', { name: 'author', content: '王丰羽 assisted by Claude Code' }]
+    ['meta', { name: 'author', content: '王丰羽 assisted by Claude Code' }],
+    // SEO / 搜索引擎优化
+    ['meta', { name: 'keywords', content: '处理器设计,超标量处理器,乱序执行,分支预测,Cache,RISC-V,x86,ARM,Apple M,香山,UCIe,CXL,Chiplet,TAGE,ROB,微架构' }],
+    ['meta', { property: 'og:type', content: 'book' }],
+    ['meta', { property: 'og:title', content: '2030处理器设计' }],
+    ['meta', { property: 'og:description', content: '面向 2030 年代的现代处理器微架构设计原理与工业实践，55 章、525 幅原创架构图。' }],
+    ['meta', { property: 'og:image', content: SITE_URL + '/cover.svg' }],
+    ['meta', { property: 'og:url', content: SITE_URL + '/' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    // Google Search Console 站长验证（GOOGLE_SITE_VERIFICATION 填了才输出）
+    ...(GOOGLE_SITE_VERIFICATION
+      ? [['meta', { name: 'google-site-verification', content: GOOGLE_SITE_VERIFICATION }] as any]
+      : [])
   ],
+
+  // 构建收尾时生成 sitemap.xml（供 Google / Bing 等抓取）
+  buildEnd(siteConfig: any) {
+    const outDir = siteConfig.outDir
+    const pages = (siteConfig.pages as string[]).filter((p) => !p.startsWith('404'))
+    const now = new Date().toISOString().slice(0, 10)
+    const urls = pages.map((p: string) => {
+      // docs/foo/bar.md → /foo/bar  （cleanUrls: true 没有 .html 后缀）
+      const rel = p.replace(/\.md$/, '').replace(/\/index$/, '/')
+      const url = SITE_URL + '/' + rel
+      return (
+        '  <url>\n' +
+        `    <loc>${url}</loc>\n` +
+        `    <lastmod>${now}</lastmod>\n` +
+        '    <changefreq>monthly</changefreq>\n' +
+        '  </url>'
+      )
+    }).join('\n')
+    const sitemap =
+      '<?xml version="1.0" encoding="UTF-8"?>\n' +
+      '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
+      urls + '\n' +
+      '</urlset>\n'
+    fs.writeFileSync(path.join(outDir, 'sitemap.xml'), sitemap, 'utf-8')
+    console.log(`[buildEnd] sitemap.xml written with ${pages.length} urls`)
+  },
 
   // VitePress 只会给 Markdown 链接 `[x](/path)` 自动加 base，不处理
   // 正文里的 raw HTML（<img src="/figures/..">、<a href="/bibliography#..">）。

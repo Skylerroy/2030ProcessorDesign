@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://skylerroy.github.io/2030ProcessorDesign/sitemap.xml
