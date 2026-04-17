@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="120" viewBox="0 0 400 120">
+  <rect width="400" height="120" fill="#fee" stroke="#c00" stroke-width="2"/>
+  <text x="200" y="55" text-anchor="middle" font-family="sans-serif" font-size="16" fill="#900">
+    TikZ 编译失败
+  </text>
+  <text x="200" y="80" text-anchor="middle" font-family="monospace" font-size="11" fill="#600">
+    ch16-fig04
+  </text>
+</svg>
