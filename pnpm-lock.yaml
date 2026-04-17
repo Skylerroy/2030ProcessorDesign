@@ -14,9 +14,6 @@ importers:
       markdown-it-container:
         specifier: ^4.0.0
         version: 4.0.0
-      markdown-it-katex:
-        specifier: ^2.0.3
-        version: 2.0.3
       vitepress:
         specifier: ^1.6.3
         version: 1.6.4(@algolia/client-search@5.50.2)(markdown-it-mathjax3@4.3.2)(postcss@8.5.10)(search-insights@2.17.3)
@@ -725,10 +722,6 @@ packages:
     resolution: {integrity: sha512-pQpZbdBu7wCTmQUh7ufPmLr0pFoObnGUoL/yhtwJDgmmQpbkg/0HSVti25Fu4rmd1oCR6NGWe9vqTWuWv3GcNA==}
     hasBin: true
 
-  katex@0.6.0:
-    resolution: {integrity: sha512-rS4mY3SvHYg5LtQV6RBcK0if7ur6plyEukAOV+jGGPqFImuzu8fHL6M752iBmRGoUyF0bhZbAPoezehn7xYksA==}
-    hasBin: true
-
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -738,14 +731,8 @@ packages:
   markdown-it-container@4.0.0:
     resolution: {integrity: sha512-HaNccxUH0l7BNGYbFbjmGpf5aLHAMTinqRZQAEQbMr2cdD3z91Q6kIo1oUn1CQndkT03jat6ckrdRYuwwqLlQw==}
 
-  markdown-it-katex@2.0.3:
-    resolution: {integrity: sha512-nUkkMtRWeg7OpdflamflE/Ho/pWl64Lk9wNBKOmaj33XkQdumhXAIYhI0WO03GeiycPCsxbmX536V5NEXpC3Ng==}
-
   markdown-it-mathjax3@4.3.2:
     resolution: {integrity: sha512-TX3GW5NjmupgFtMJGRauioMbbkGsOXAAt1DZ/rzzYmTHqzkO1rNAdiMD4NiruurToPApn2kYy76x02QN26qr2w==}
-
-  match-at@0.1.1:
-    resolution: {integrity: sha512-h4Yd392z9mST+dzc+yjuybOGFNOZjmXIPKWjxBd1Bb23r4SmDOsk2NYCU2BMUBGbSpZqwVsZYNq26QS3xfaT3Q==}
 
   mathjax-full@3.2.2:
     resolution: {integrity: sha512-+LfG9Fik+OuI8SLwsiR02IVdjcnRCy5MufYLi0C3TdMT56L/pjB0alMVGgoWJF8pN9Rc7FESycZB9BMNWIid5w==}
@@ -1673,10 +1660,6 @@ snapshots:
     dependencies:
       commander: 8.3.0
 
-  katex@0.6.0:
-    dependencies:
-      match-at: 0.1.1
-
   magic-string@0.30.21:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.5
@@ -1685,10 +1668,6 @@ snapshots:
 
   markdown-it-container@4.0.0: {}
 
-  markdown-it-katex@2.0.3:
-    dependencies:
-      katex: 0.6.0
-
   markdown-it-mathjax3@4.3.2:
     dependencies:
       juice: 8.1.0
@@ -1696,8 +1675,6 @@ snapshots:
     transitivePeerDependencies:
       - encoding
     optional: true
-
-  match-at@0.1.1: {}
 
   mathjax-full@3.2.2:
     dependencies:

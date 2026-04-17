@@ -1,10 +1,121 @@
 import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
-// @ts-ignore - markdown-it-katex 没有 TypeScript 类型声明
-import katex from 'markdown-it-katex'
+import katex from 'katex'
 // Phase 2：侧边栏改为由 scripts/build-sidebar.py 从 latex/main.tex 自动生成。
 // 生成产物即本目录下的 sidebar.json；每次 `pnpm run convert` 都会刷新它。
 import sidebar from './sidebar.json' with { type: 'json' }
+
+// 本书自定义宏（与 latex/processor-design.sty 对齐）
+const KATEX_MACROS: Record<string, string> = {
+  '\\CPI':    '\\mathrm{CPI}',
+  '\\IPC':    '\\mathrm{IPC}',
+  '\\MIPS':   '\\mathrm{MIPS}',
+  '\\FLOPS':  '\\mathrm{FLOPS}',
+  '\\Tcycle': 'T_{\\mathrm{cycle}}',
+  '\\Texec':  'T_{\\mathrm{exec}}',
+  '\\Speedup': '\\mathrm{Speedup}',
+  '\\missrate':    'r_{\\mathrm{miss}}',
+  '\\hitrate':     'r_{\\mathrm{hit}}',
+  '\\misspenalty': 't_{\\mathrm{penalty}}',
+  // siunitx 近似
+  '\\SI':  '#1\\,\\text{#2}',
+  '\\si':  '\\text{#1}',
+  '\\num': '#1',
+  '\\qty': '#1\\,\\text{#2}'
+}
+
+/** 自写的 markdown-it 数学插件：直接调用 KaTeX 0.16 的 renderToString，
+ *  保证输出 HTML 结构和本项目打包的 katex.min.css 完全匹配（换 markdown-it-katex@2
+ *  那种老包会输出 2016 年的类名与现代 CSS 对不上，造成"公式每字符一行"）。
+ */
+function katexPlugin(md: any) {
+  const renderTex = (src: string, displayMode: boolean): string => {
+    try {
+      return katex.renderToString(src, {
+        displayMode,
+        throwOnError: false,
+        errorColor: '#c00',
+        macros: KATEX_MACROS,
+        strict: 'ignore'
+      })
+    } catch (e: any) {
+      return `<span class="katex-error" style="color:#c00">${md.utils.escapeHtml(src)}</span>`
+    }
+  }
+
+  // Inline: $...$ （不允许 $ 紧跟空格或数字；与 pandoc tex_math_dollars 对齐）
+  md.inline.ruler.after('escape', 'math_inline', (state: any, silent: boolean) => {
+    if (state.src[state.pos] !== '$') return false
+    const start = state.pos + 1
+    // 不是 display（$$）才进 inline
+    if (state.src[state.pos + 1] === '$') return false
+    // 向前找匹配的 $（跳过 \\$ 转义）
+    let pos = start
+    let found = -1
+    while (pos < state.posMax) {
+      const ch = state.src[pos]
+      if (ch === '\\') { pos += 2; continue }
+      if (ch === '$') { found = pos; break }
+      // 禁止跨越 block 结束（行尾 + 下一空行）
+      pos++
+    }
+    if (found === -1 || found === start) return false
+    const content = state.src.slice(start, found)
+    // Pandoc rule：`$` 前后不应紧邻数字/字母（防止 `a$1` 之类误识别）
+    if (/^\s/.test(content) || /\s$/.test(content)) return false
+    if (!silent) {
+      const token = state.push('math_inline', '', 0)
+      token.markup = '$'
+      token.content = content
+    }
+    state.pos = found + 1
+    return true
+  })
+
+  // Block: $$...$$
+  md.block.ruler.after('blockquote', 'math_block', (state: any, start: number, end: number, silent: boolean) => {
+    const lineStart = state.bMarks[start] + state.tShift[start]
+    if (state.src.slice(lineStart, lineStart + 2) !== '$$') return false
+    // 允许 $$...$$ 在一行
+    let line = start
+    let content = ''
+    const firstLine = state.src.slice(lineStart + 2, state.eMarks[line])
+    if (firstLine.trim().endsWith('$$')) {
+      if (silent) return true
+      const token = state.push('math_block', '', 0)
+      token.markup = '$$'
+      token.content = firstLine.trim().replace(/\$\$$/, '')
+      state.line = start + 1
+      return true
+    }
+    // 多行：扫到闭合的 $$
+    let found = false
+    content = firstLine + '\n'
+    for (line = start + 1; line < end; line++) {
+      const ls = state.bMarks[line] + state.tShift[line]
+      const le = state.eMarks[line]
+      const text = state.src.slice(ls, le)
+      if (text.trim() === '$$' || text.trim().endsWith('$$')) {
+        content += text.replace(/\$\$\s*$/, '')
+        found = true
+        break
+      }
+      content += text + '\n'
+    }
+    if (!found) return false
+    if (silent) return true
+    const token = state.push('math_block', '', 0)
+    token.markup = '$$'
+    token.content = content
+    state.line = line + 1
+    return true
+  }, { alt: ['paragraph'] })
+
+  md.renderer.rules.math_inline = (tokens: any[], idx: number) =>
+    renderTex(tokens[idx].content, false)
+  md.renderer.rules.math_block = (tokens: any[], idx: number) =>
+    `<div class="math-display">${renderTex(tokens[idx].content, true)}</div>\n`
+}
 
 const SITE_BASE = process.env.BASE ?? '/2030ProcessorDesign/'
 
@@ -45,32 +156,8 @@ export default defineConfig({
 
   markdown: {
     lineNumbers: false,
-    // 使用 KaTeX 而非 MathJax3：输出 HTML/DOM 结构，可复制、
-    // 与正文字号一致，比 SVG 模式对屏幕阅读和文字选取更友好。
-    // `\SI{3}{GHz}`、`\mathrm{}`、`\text{}` 等常用宏已在 macros 里显式定义，
-    // 使 KaTeX 能识别 LaTeX 源里不是标准 AMS 的宏。
     config: (md) => {
-      md.use(katex, {
-        throwOnError: false,
-        errorColor: '#cc0000',
-        macros: {
-          '\\CPI':   '\\mathrm{CPI}',
-          '\\IPC':   '\\mathrm{IPC}',
-          '\\MIPS':  '\\mathrm{MIPS}',
-          '\\FLOPS': '\\mathrm{FLOPS}',
-          '\\Tcycle': 'T_{\\mathrm{cycle}}',
-          '\\Texec':  'T_{\\mathrm{exec}}',
-          '\\Speedup': '\\mathrm{Speedup}',
-          '\\missrate':    'r_{\\mathrm{miss}}',
-          '\\hitrate':     'r_{\\mathrm{hit}}',
-          '\\misspenalty': 't_{\\mathrm{penalty}}',
-          // siunitx 简化：\SI{3}{GHz} → 3\,\text{GHz}
-          '\\SI':   '#1\\,\\text{#2}',
-          '\\si':   '\\text{#1}',
-          '\\num':  '#1',
-          '\\qty':  '#1\\,\\text{#2}'
-        }
-      })
+      md.use(katexPlugin)
       // 自定义容器：::: tradeoff 设计权衡 N 标题
       md.use(container, 'tradeoff', {
         validate: (params: string) => !!params.trim().match(/^tradeoff\s*(.*)$/),
