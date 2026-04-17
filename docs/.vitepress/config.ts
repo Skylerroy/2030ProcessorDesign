@@ -4,8 +4,13 @@ import container from 'markdown-it-container'
 // 生成产物即本目录下的 sidebar.json；每次 `pnpm run convert` 都会刷新它。
 import sidebar from './sidebar.json' with { type: 'json' }
 
+const SITE_BASE = process.env.BASE ?? '/2030ProcessorDesign/'
+
 export default defineConfig({
   lang: 'zh-CN',
+  // GitHub Pages 项目站点：站点服务在 /<repo>/ 子路径下。环境变量 BASE 可
+  // 覆盖，用于自定义域名（BASE=/）或别的子路径。
+  base: SITE_BASE,
   title: '2030处理器设计',
   titleTemplate: ':title · 2030处理器设计',
   description:
@@ -22,6 +27,19 @@ export default defineConfig({
     ['link', { rel: 'icon', href: '/favicon.svg' }],
     ['meta', { name: 'author', content: '王丰羽 assisted by Claude Code' }]
   ],
+
+  // VitePress 只会给 Markdown 链接 `[x](/path)` 自动加 base，不处理
+  // 正文里的 raw HTML（<img src="/figures/..">、<a href="/bibliography#..">）。
+  // 我们的 TikZ 图和参考文献引用都走 raw HTML，所以在每页 HTML 生成后做
+  // 一次字符串替换补齐 base。只改**绝对根路径**开头的；外链保留不动。
+  transformHtml(code) {
+    if (SITE_BASE === '/') return code
+    const b = SITE_BASE.replace(/\/$/, '')
+    return code
+      .replace(/(<img\b[^>]*\bsrc=")\/(figures\/)/g, `$1${b}/$2`)
+      .replace(/(<a\b[^>]*\bhref=")\/(bibliography#)/g, `$1${b}/$2`)
+      .replace(/(<a\b[^>]*\bhref=")\/(part[0-9]+\/ch[0-9]+)/g, `$1${b}/$2`)
+  },
 
   markdown: {
     lineNumbers: false,
