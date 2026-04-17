@@ -93,8 +93,15 @@ function katexPlugin(md: any) {
     }
     if (found === -1 || found === start) return false
     const content = state.src.slice(start, found)
-    // Pandoc rule：`$` 前后不应紧邻数字/字母（防止 `a$1` 之类误识别）
-    if (/^\s/.test(content) || /\s$/.test(content)) return false
+    // Pandoc tex_math_dollars 规则的近似：
+    //   - 允许跨行（换行 \n 可出现在边界，pandoc 经常输出 `$\nX\n$`）
+    //   - 禁止紧贴空格/制表符（`$ x $` 不是公式）
+    //   - `$` 前后不应紧贴数字（避免 "价格 $100" 被识别）
+    if (/^[ \t]/.test(content) || /[ \t]$/.test(content)) return false
+    const before = state.src[state.pos - 1]
+    const after = state.src[found + 1]
+    if (before && /\d/.test(before)) return false
+    if (after && /\d/.test(after)) return false
     if (!silent) {
       const token = state.push('math_inline', '', 0)
       token.markup = '$'
