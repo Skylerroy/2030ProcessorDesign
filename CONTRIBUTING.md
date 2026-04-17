@@ -7,7 +7,7 @@
 
 ### 1. 内容错误 / 错别字 / 引用错漏 → 提 Issue
 
-打开 [Issues 页面](https://github.com/fengyuwang/2030-processor-design/issues)，
+打开 [Issues 页面](https://github.com/Skylerroy/2030ProcessorDesign/issues)，
 用 "勘误" 模板报告（若无模板直接写明）：
 
 - 出现位置：**章节链接 + 具体段落/公式/图号**（比如 "ch07 的表 7.3 第 2 行"）

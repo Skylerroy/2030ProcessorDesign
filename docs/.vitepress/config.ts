@@ -59,7 +59,7 @@ export default defineConfig({
     socialLinks: [
       {
         icon: 'github',
-        link: 'https://github.com/fengyuwang/2030-processor-design'
+        link: 'https://github.com/Skylerroy/2030ProcessorDesign'
       }
     ],
 

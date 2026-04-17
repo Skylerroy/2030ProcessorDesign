@@ -35,8 +35,8 @@ Claude Code（Anthropic）在章节撰写、代码示例、交叉引用整理与
 
 ## 联系方式
 
-- GitHub Issues：<https://github.com/fengyuwang/2030-processor-design/issues>（错别字、内容建议、技术问题）
-- GitHub Discussions：<https://github.com/fengyuwang/2030-processor-design/discussions>（开放讨论）
+- GitHub Issues：<https://github.com/Skylerroy/2030ProcessorDesign/issues>（错别字、内容建议、技术问题）
+- GitHub Discussions：<https://github.com/Skylerroy/2030ProcessorDesign/discussions>（开放讨论）
 
 ## 引用
 
@@ -47,7 +47,7 @@ Claude Code（Anthropic）在章节撰写、代码示例、交叉引用整理与
   title     = {2030处理器设计：从基础到超标量——面向未来的现代处理器微架构},
   author    = {王丰羽},
   year      = {2026},
-  url       = {https://github.com/fengyuwang/2030-processor-design},
+  url       = {https://github.com/Skylerroy/2030ProcessorDesign},
   note      = {assisted by Claude Code}
 }
 ```

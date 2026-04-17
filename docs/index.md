@@ -17,7 +17,7 @@ hero:
       link: /about
     - theme: alt
       text: GitHub
-      link: https://github.com/fengyuwang/2030-processor-design
+      link: https://github.com/Skylerroy/2030ProcessorDesign
 
 features:
   - icon: 🧩
@@ -75,8 +75,8 @@ features:
 | v0.2 (Phase 2) | 2026-04 | GitBook 站点上线；补齐参考文献、勘误与附录；章节粒度细化 |
 | v0.1 (Phase 1) | 2026-01 | LaTeX PDF 初稿完成，八篇 55 章主体内容 |
 
-更详细的变更明细（精确到章节改动）请见仓库的 [CHANGELOG.md](https://github.com/fengyuwang/2030-processor-design/blob/main/CHANGELOG.md)；
-如果发现新的错误或希望补充某一项工业动态，欢迎在 GitHub 上提 Issue 或 PR。
+更详细的变更明细（精确到章节改动）请见仓库的 [CHANGELOG.md](https://github.com/Skylerroy/2030ProcessorDesign/blob/main/CHANGELOG.md)；
+如果发现新的错误或希望补充某一项工业动态，欢迎在 GitHub 上提 Issue。
 
 ## 许可与贡献
 

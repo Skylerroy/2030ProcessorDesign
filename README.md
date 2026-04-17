@@ -13,7 +13,7 @@ Golden/Lion Cove、AMD Zen 4/5、Apple M 系列、香山昆明湖）、多核与
 
 ## 在线阅读
 
-<https://fengyuwang.github.io/2030-processor-design/>（示例 URL，以实际部署为准）
+<https://skylerroy.github.io/2030ProcessorDesign/>（CI 部署后生效）
 
 本仓库公开的是本书的 **可读 Markdown 副本**，搭配一个 VitePress 站点壳让
 在线阅读体验接近纸质书（章节目录、全文中文搜索、公式与图清晰渲染）。
