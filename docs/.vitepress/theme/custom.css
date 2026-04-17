@@ -51,16 +51,27 @@
   font-weight: 600;
 }
 
-/* TikZ 生成的 SVG 图居中 + 限制最大宽度 */
+/* TikZ 图：页面 80% 宽度居中 + 白底不透明 */
 .vp-doc figure {
   margin: 1.5em auto;
   text-align: center;
 }
 
 .vp-doc figure img {
+  display: block;
+  width: 80%;
   max-width: 100%;
   height: auto;
-  display: inline-block;
+  margin: 0 auto;
+  /* 显式白底：防止深色模式下浏览器扩展把 PNG 的白色误判为"透明"而反色 */
+  background-color: #ffffff;
+  /* 深色模式下让白底与暗色页面背景有一道柔和的边界 */
+  border-radius: 4px;
+}
+
+.dark .vp-doc figure img {
+  /* 暗色主题下的细边框让图与页面分开 */
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.08);
 }
 
 .vp-doc figure figcaption {
